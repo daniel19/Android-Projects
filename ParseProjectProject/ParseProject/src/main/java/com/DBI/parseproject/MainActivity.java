@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.os.Build;
 
 //Notification Classes
+import android.preview.support.wearable.notifications.*;
+import android.preview.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.NotificationCompat;
 
 
 public class MainActivity extends Activity {
