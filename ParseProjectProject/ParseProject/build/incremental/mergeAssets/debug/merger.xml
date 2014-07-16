@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="/Users/developteam/Documents/Developer/ParseProjectProject/ParseProject/src/main/assets" />
+        <source path="/Users/developer/Documents/Developer/Android/Android-Projects/ParseProjectProject/ParseProject/src/main/assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/Users/developteam/Documents/Developer/ParseProjectProject/ParseProject/src/debug/assets" />
+        <source path="/Users/developer/Documents/Developer/Android/Android-Projects/ParseProjectProject/ParseProject/src/debug/assets" />
     </dataSet>
 
 </merger>
