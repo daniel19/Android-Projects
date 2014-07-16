@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 
 
 public class MyActivity extends Activity {
@@ -48,6 +51,7 @@ public class MyActivity extends Activity {
 
     /**
      * A placeholder fragment containing a simple view.
+     *      -A modular container within an activity.
      */
     public static class PlaceholderFragment extends Fragment {
 
@@ -57,7 +61,21 @@ public class MyActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
+            //Fake Data for listview_forecast
+            ArrayList forecast = new ArrayList();
+            for(int i = 0; i < 10; i++){
+                forecast.add("Today-Sunny-88/" + i);
+            }
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                    getActivity(), //Current Context of the activity
+                    R.layout.list_item_forecast, //id of listview
+                    R.id.list_item_forecase_textview, // id of textview
+                    forecast); // data
+            ListView lv = (ListView) rootView.findViewById(R.id.listView_forecast);
+            lv.setAdapter(arrayAdapter);
             return rootView;
         }
     }
