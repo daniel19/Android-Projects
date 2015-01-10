@@ -24,9 +24,9 @@ import javax.net.ssl.HttpsURLConnection;
  * objects stored in the cloud.
  */
 public class PickerRequest extends AsyncTask<String, Void, String> {
-    public static final String API_KEY = "AIzaSyDKxepSnwG891YRUtkfnfTDe5VoyHmH08s";
+    public static final String API_KEY = "";
     public static final String MAIN_URL = "https://www.googleapis.com/storage/v1";
-    public static final String GET_URL = "/b/json_parts/o/list.json";
+    public static final String GET_URL = "";
 
     JSONObject jsonResponse;
     Context context;
