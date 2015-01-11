@@ -1,10 +1,10 @@
 package CloudRequest;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dbi.myapplication.main;
 
@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,6 +32,7 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     public JSONObject jsonResponse;
     public final Context context;
     public final main activity;
+    private ProgressDialog progressDialog;
     public PickerRequest(Context context, main activity){
         jsonResponse = null;
         this.context = context;
@@ -49,8 +51,25 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     }
     @Override
     protected void onPostExecute(String result){
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Log.d("PICKER", "Result Status: " + result);
         activity.setListView(jsonResponse);
+        FileOutputStream out;
+        try{
+            //file = File.createTempFile("list", "json", context.getCacheDir());
+            out = context.openFileOutput("list.json", Context.MODE_PRIVATE);
+            byte[] bytes = result.getBytes();
+            out.write(bytes, 0, bytes.length);
+            out.close();
+        }catch(IOException ex) {
+            Log.e("PICKER", "Error writing to file. " + ex.getMessage());
+        }
+
+    }
+
+    @Override
+    protected  void onPreExecute(){
+        super.onPreExecute();
+
     }
 
 
@@ -68,10 +87,11 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
             connection.connect();
             Log.d("PICKER", url);
             Log.d("PICKER", "Response Code: " + connection.getResponseCode());
+            Log.d("PICKER", "Response Message: " + connection.getResponseMessage());
             inputStream = connection.getInputStream();
 
             jsonResponse = convertData(inputStream);
-            result = "success";
+            result = jsonResponse.toString();
         }catch(IOException|JSONException ex) {
             result += ex.getMessage();
         }finally{
