@@ -2,10 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        debug {
-            keyAlias 'androiddebugkey'
-            storeFile file('/Users/developer/.android/debug.keystore')
-        }
     }
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -22,7 +18,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.debug
         }
     }
 }

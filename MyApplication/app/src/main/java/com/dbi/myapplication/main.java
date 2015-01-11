@@ -59,6 +59,11 @@ public class main extends ActionBarActivity {
             if(jsonResponse != null) {
                 //A dictionary with a JSONArray array of arrays.
                JSONArray cpuList = (JSONArray) jsonResponse.get("cpu");
+               JSONArray memList = (JSONArray) jsonResponse.get("memory");
+               JSONArray storageList = (JSONArray) jsonResponse.get("storage");
+               JSONArray caseList = (JSONArray) jsonResponse.get("video");
+               JSONArray motherboardList = (JSONArray) jsonResponse.get("motherboard");
+               JSONArray powerList = (JSONArray) jsonResponse.get("power");
 
             }else{
                 Toast.makeText(getApplicationContext(), "No Data was returned.", Toast.LENGTH_SHORT).show();

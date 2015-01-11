@@ -28,9 +28,9 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     public static final String MAIN_URL = "https://www.googleapis.com/storage/v1";
     public static final String GET_URL = "";
 
-    JSONObject jsonResponse;
-    Context context;
-    main activity;
+    public JSONObject jsonResponse;
+    public final Context context;
+    public final main activity;
     public PickerRequest(Context context, main activity){
         jsonResponse = null;
         this.context = context;
