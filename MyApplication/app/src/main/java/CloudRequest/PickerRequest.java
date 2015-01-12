@@ -37,6 +37,7 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
         jsonResponse = null;
         this.context = context;
         this.activity = activity;
+        progressDialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -63,13 +64,17 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
         }catch(IOException ex) {
             Log.e("PICKER", "Error writing to file. " + ex.getMessage());
         }
-
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     protected  void onPreExecute(){
         super.onPreExecute();
-
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Gathering Parts Data.");
+        progressDialog.show();
     }
 
 

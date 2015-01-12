@@ -1,5 +1,6 @@
 package com.dbi.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -105,7 +106,9 @@ public class main extends ActionBarActivity {
                 ArrayList<String> itemList = new ArrayList<String>();
                 for(int i =0; i< itemarray.length(); i++){
                     if(itemarray.get(i) != null) {
-                        itemList.add(itemarray.get(i).toString());
+                        JSONArray localArray = (JSONArray)itemarray.get(i);
+
+                        itemList.add(localArray.get(0).toString());
                     }
                 }
                 subIntent.putExtra("Name", item);

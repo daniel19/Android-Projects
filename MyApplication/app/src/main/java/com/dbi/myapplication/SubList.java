@@ -19,7 +19,7 @@ public class SubList extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_list);
         Intent intent = getIntent();
-        setTitle(intent.getStringExtra("Name"));
+        setTitle(intent.getStringExtra("Name").toUpperCase());
         ArrayList<String> list = intent.getStringArrayListExtra("Object List");
         Log.d("PICKER", "Removed + " + list.remove(0));
         Log.d("PICKER", "List size: " + list.size());
