@@ -8,13 +8,13 @@ import android.media.Image;
 public class Memory extends Parts{
     public String speed;
     public String type;
-    public int cas;
+    public String cas;
     public String modules;
-    public int size;
-    public double pricePerGB;
+    public String size;
+    public String pricePerGB;
 
-    public Memory(String name, double cost,Image image, String speed, String type, int cas,
-                  String modules, int size, double pricePerGB) {
+    public Memory(String name, String cost,Image image, String speed, String type, String cas,
+                  String modules, String size, String pricePerGB) {
         super(name, cost, image);
         this.speed = speed;
         this.type = type;

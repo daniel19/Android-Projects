@@ -1,6 +1,4 @@
 package CloudRequest;
-
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -30,12 +28,10 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     public static final String GET_URL = "";
 
     public JSONObject jsonResponse;
-    public final Context context;
     public final main activity;
     private ProgressDialog progressDialog;
-    public PickerRequest(Context context, main activity){
+    public PickerRequest(main activity){
         jsonResponse = null;
-        this.context = context;
         this.activity = activity;
         progressDialog = new ProgressDialog(activity);
     }
@@ -43,7 +39,7 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
        String data = "";
-        try{
+       try{
            data = download(params[0]);
        }catch(IOException ex){
            Log.d("PICKER", ex.getMessage());
@@ -52,12 +48,10 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     }
     @Override
     protected void onPostExecute(String result){
-        Log.d("PICKER", "Result Status: " + result);
         activity.setListView(jsonResponse);
         FileOutputStream out;
         try{
-            //file = File.createTempFile("list", "json", context.getCacheDir());
-            out = context.openFileOutput("list.json", Context.MODE_PRIVATE);
+            out = activity.openFileOutput("list.json", Context.MODE_PRIVATE);
             byte[] bytes = result.getBytes();
             out.write(bytes, 0, bytes.length);
             out.close();

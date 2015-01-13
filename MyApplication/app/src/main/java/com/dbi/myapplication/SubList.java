@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import Model.Parts;
+
 
 public class SubList extends ActionBarActivity {
     ListView subListView;
@@ -20,13 +22,12 @@ public class SubList extends ActionBarActivity {
         setContentView(R.layout.activity_sub_list);
         Intent intent = getIntent();
         setTitle(intent.getStringExtra("Name").toUpperCase());
-        ArrayList<String> list = intent.getStringArrayListExtra("Object List");
-        Log.d("PICKER", "Removed + " + list.remove(0));
-        Log.d("PICKER", "List size: " + list.size());
+        ArrayList<Parts> list = (ArrayList<Parts>)intent.getSerializableExtra("Object List");
+        //list.remove(0);
         subListView = (ListView) findViewById(R.id.sublist);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         subListView.setAdapter(adapter);
-        Log.d("PICKER", list.get(0));
+
     }
 
 

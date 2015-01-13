@@ -7,12 +7,12 @@ import android.media.Image;
  */
 public class Case extends Parts {
     public String type;
-    public int countEXT;
-    public int countINT;
-    public int powerSupply;
+    public String countEXT;
+    public String countINT;
+    public String powerSupply;
 
-    public Case(String name, double cost, Image image, String type, int countEXT, int countINT,
-                int powerSupply) {
+    public Case(String name, String cost, Image image, String type, String countEXT, String countINT,
+                String powerSupply) {
         super(name, cost, image);
         this.type = type;
         this.countEXT = countEXT;

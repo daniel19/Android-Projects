@@ -8,11 +8,11 @@ import android.media.Image;
 public class VideoCard extends Parts {
     public String series;
     public String chipset;
-    public int memory;
+    public String memory;
     public String clockSpeed;
 
-     public VideoCard(String name, double cost, Image image, String series, String chipset,
-                      int memory, String clockSpeed) {
+     public VideoCard(String name, String cost, Image image, String series, String chipset,
+                      String memory, String clockSpeed) {
         super(name, cost, image);
         this.series = series;
         this.chipset = chipset;

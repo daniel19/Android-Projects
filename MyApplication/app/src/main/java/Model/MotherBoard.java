@@ -8,11 +8,11 @@ import android.media.Image;
 public class MotherBoard extends Parts {
     public String socket;
     public String formFactor;
-    public int ramSlots;
-    public int maxRam;
+    public String ramSlots;
+    public String maxRam;
 
-    public MotherBoard(String name, double cost, Image image, String socket, String formFactor,
-                        int ramSlots, int maxRam) {
+    public MotherBoard(String name, String cost, Image image, String socket, String formFactor,
+                        String ramSlots, String maxRam) {
         super(name, cost, image);
         this.socket = socket;
         this.formFactor = formFactor;

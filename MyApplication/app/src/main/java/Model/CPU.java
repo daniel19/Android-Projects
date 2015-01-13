@@ -6,10 +6,10 @@ import android.media.Image;
  * CPU class that represents CPUs.
  */
 public class CPU extends Parts {
-    public double speed;
-    public int cores;
+    public String speed;
+    public String cores;
 
-    public CPU(String name, double cost, Image image, int cores, double speed) {
+    public CPU(String name, String cost, Image image, String cores, String speed) {
         super(name, cost, image);
         this.speed =speed;
         this.cores = cores;

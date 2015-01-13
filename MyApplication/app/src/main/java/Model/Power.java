@@ -9,11 +9,11 @@ public class Power extends Parts {
     public String series;
     public String form;
     public String efficiency;
-    public int watts;
+    public String watts;
     public String modularStatus;
 
-    public Power(String name, double cost, Image image, String series, String form, String efficiency,
-                 int watts, String modularStatus) {
+    public Power(String name, String cost, Image image, String series, String form, String efficiency,
+                 String watts, String modularStatus) {
         super(name, cost, image);
         this.series =series;
         this.form = form;
