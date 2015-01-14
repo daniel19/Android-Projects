@@ -104,134 +104,18 @@ public class main extends ActionBarActivity {
          */
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ArrayList<Parts> partsArraylist = new ArrayList<>();
-            String item = keyList.get(position);
+                String item = keyList.get(position);
             try {
                 JSONArray itemArray = (JSONArray)jsonResponse.get(item);
                 Intent subIntent = new Intent(main.this, SubList.class);
-                switch (item){
-                    case "case":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String type = localArray.get(1).toString();
-                                String cext = localArray.get(2).toString();
-                                String cint = localArray.get(3).toString();
-                                String powerSupply = localArray.getString(4);
-                                Case mCase = new Case(name, price, null, type, cext, cint, powerSupply);
-                                partsArraylist.add(mCase);
-                            }
-                        }
-                        break;
-                    case "cpu":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String speed = localArray.getString(1);
-                                String cores = localArray.getString(2);
-
-                                CPU mCPU = new CPU(name, price, null, cores, speed);
-                                partsArraylist.add(mCPU);
-                            }
-                        }
-                        break;
-                    case "power":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String series = localArray.get(1).toString();
-                                String form = localArray.get(2).toString();
-                                String efficeincy = localArray.get(3).toString();
-                                String watts = localArray.getString(4);
-                                String modular = localArray.get(5).toString();
-                                Power mPower = new Power(name, price, null, series, form, efficeincy,
-                                        watts, modular);
-                                partsArraylist.add(mPower);
-                            }
-                        }
-                        break;
-                    case "motherboard":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String socket = localArray.get(1).toString();
-                                String form = localArray.get(2).toString();
-                                String ram = localArray.getString(3);
-                                String maxRam = localArray.get(4).toString();
-                                MotherBoard mMother = new MotherBoard(name, price, null, socket, form, ram,
-                                        maxRam);
-                                partsArraylist.add(mMother);
-                            }
-                        }
-                        break;
-                    case "storage":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String series = localArray.get(1).toString();
-                                String form = localArray.get(2).toString();
-                                String type = localArray.get(3).toString();
-                                String capacity = localArray.getString(4);
-                                String cache = localArray.get(5).toString();
-                                String ppg = localArray.getString(6);
-                                Storage mStorage = new Storage(name, price, null, series, form, type,
-                                        capacity, cache, ppg);
-                                partsArraylist.add(mStorage);
-                            }
-                        }
-                        break;
-                    case "memory":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String speed = localArray.get(1).toString();
-                                String type = localArray.get(2).toString();
-                                String cas = localArray.getString(3);
-                                String modules = localArray.get(4).toString();
-                                String size = localArray.getString(5);
-                                String ppg = localArray.getString(6);
-                                Memory mMemory = new Memory(name, price, null, speed, type, cas,
-                                        modules, size, ppg);
-                                partsArraylist.add(mMemory);
-                            }
-                        }
-                        break;
-                    case "video":
-                        for(int i=0; i<itemArray.length(); i++){
-                            JSONArray localArray = (JSONArray)itemArray.get(i);
-                            if(!localArray.getString(0).equals("null")) {
-                                String name = localArray.get(0).toString();
-                                String price = localArray.getString(localArray.length() - 1);
-                                String series = localArray.get(1).toString();
-                                String chipset = localArray.get(2).toString();
-                                String memory = localArray.getString(3);
-                                String speed = localArray.getString(4);
-                                VideoCard mVideo = new VideoCard(name, price, null, series, chipset,
-                                        memory, speed);
-                                partsArraylist.add(mVideo);
-                            }
-                        }
-                        break;
-                }
-
                 subIntent.putExtra("Name", item);
-                subIntent.putExtra("Object List", partsArraylist);
+                subIntent.putExtra("Object List", itemArray.toString());
                 main.this.startActivity(subIntent);
-            }catch (JSONException ex){
-                Log.e("PICKER", "Can't access inner objects. " + ex.getMessage());
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
+
         }
     }
 
