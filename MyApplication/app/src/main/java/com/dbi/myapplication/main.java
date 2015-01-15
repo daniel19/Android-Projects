@@ -44,28 +44,36 @@ public class main extends ActionBarActivity {
         listView = (ListView) findViewById(R.id.partsList);
         listView.setOnItemClickListener(new PartsListener());
 
-        //Load Json file from GCS
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
         //Check to see if file is present
         try{
             FileInputStream inputStream = openFileInput("list.json");
             byte[] result = new byte[inputStream.available()];
             inputStream.read(result,0,inputStream.available());
+
             setListView(new JSONObject(new String(result)));
             filePresent = true;
+
             //Check to see if file is more than 24hrs old
             File json = getFileStreamPath("list.json");
             Date lastMod = new Date(json.lastModified());
-            long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
+            long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L; //24 hours in milliseconds
             if(Math.abs(lastMod.getTime() - new Date().getTime()) >= MILLIS_PER_DAY){
                 filePresent = false;
             }
         }catch (IOException| JSONException ex){
             Log.e("PICKER", "Unable to process cache file." + ex.getMessage());
         }
+        connectToJson(filePresent);
+
+    }
+
+    private void connectToJson(boolean filePresent) {
         //Check for network connectivity
+        //Load Json file from GCS
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected() && !filePresent){
             //Create PickerRequest object
             PickerRequest pickerRequest = new PickerRequest(this);
@@ -104,7 +112,7 @@ public class main extends ActionBarActivity {
          */
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = keyList.get(position);
+            String item = keyList.get(position);
             try {
                 JSONArray itemArray = (JSONArray)jsonResponse.get(item);
                 Intent subIntent = new Intent(main.this, SubList.class);
@@ -136,6 +144,9 @@ public class main extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if(id == R.id.refresh){
+            connectToJson(false);
         }
 
         return super.onOptionsItemSelected(item);

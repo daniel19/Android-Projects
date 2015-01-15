@@ -1,6 +1,8 @@
 package com.dbi.myapplication;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import Model.*;
@@ -41,8 +45,22 @@ public class SubList extends ActionBarActivity {
 
     }
 
+    /**
+     *
+     * @param title
+     * @param itemArray
+     * @return ArrayList<Parts>
+     */
     private ArrayList<Parts> grabItems(String title, JSONArray itemArray) {
         ArrayList<Parts> partsArraylist = new ArrayList<>();
+        Drawable ironMan;
+        AssetManager assetManager = getResources().getAssets();
+        try{
+            InputStream is = assetManager.open("iron.jpg");
+            ironMan = Drawable.createFromStream(is, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             switch (title){
                 case "case":
