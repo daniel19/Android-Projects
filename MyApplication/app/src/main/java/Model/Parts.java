@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 import java.io.Serializable;
 
 /**
@@ -10,12 +8,12 @@ import java.io.Serializable;
 public abstract class Parts implements Serializable{
     public String name;
     public String cost;
-    private Image image;
+    public String imageURL;
 
-    public Parts(String name, String cost, Image image){
+    public Parts(String name, String cost, String imageURL){
         this.name = name;
         this.cost = cost;
-        this.image = image;
+        this.imageURL = imageURL;
     }
 
     public String toString(){

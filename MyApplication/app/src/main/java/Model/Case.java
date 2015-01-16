@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 /**
  * Case class that represents a computer case;
  */
@@ -11,7 +9,7 @@ public class Case extends Parts {
     public String countINT;
     public String powerSupply;
 
-    public Case(String name, String cost, Image image, String type, String countEXT, String countINT,
+    public Case(String name, String cost, String image, String type, String countEXT, String countINT,
                 String powerSupply) {
         super(name, cost, image);
         this.type = type;

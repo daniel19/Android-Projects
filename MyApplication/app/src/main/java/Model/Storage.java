@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 /**
  * Storage class is a representation of physical storage.
  */
@@ -13,7 +11,7 @@ public class Storage extends Parts{
     public String cache;
     public String pricePerGB;
 
-    public Storage(String name, String cost, Image image, String series, String form, String type,
+    public Storage(String name, String cost, String image, String series, String form, String type,
                    String capacity, String hasCache, String pricePerGB) {
         super(name, cost, image);
         this.series =series;

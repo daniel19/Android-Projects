@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 /**
  * Memory class that is a representation of computer memory.
  */
@@ -13,7 +11,7 @@ public class Memory extends Parts{
     public String size;
     public String pricePerGB;
 
-    public Memory(String name, String cost,Image image, String speed, String type, String cas,
+    public Memory(String name, String cost,String image, String speed, String type, String cas,
                   String modules, String size, String pricePerGB) {
         super(name, cost, image);
         this.speed = speed;

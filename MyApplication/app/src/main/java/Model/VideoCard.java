@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 /**
  * VideoCard class that represents GPUs.
  */
@@ -11,7 +9,7 @@ public class VideoCard extends Parts {
     public String memory;
     public String clockSpeed;
 
-     public VideoCard(String name, String cost, Image image, String series, String chipset,
+     public VideoCard(String name, String cost, String image, String series, String chipset,
                       String memory, String clockSpeed) {
         super(name, cost, image);
         this.series = series;

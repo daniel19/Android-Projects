@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 /**
  * MotherBoard class is a object representation of loaded motherboards.
  */
@@ -11,7 +9,7 @@ public class MotherBoard extends Parts {
     public String ramSlots;
     public String maxRam;
 
-    public MotherBoard(String name, String cost, Image image, String socket, String formFactor,
+    public MotherBoard(String name, String cost, String image, String socket, String formFactor,
                         String ramSlots, String maxRam) {
         super(name, cost, image);
         this.socket = socket;

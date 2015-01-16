@@ -1,7 +1,5 @@
 package Model;
 
-import android.media.Image;
-
 /**
  * Power is a class that represents a power supply.
  */
@@ -12,7 +10,7 @@ public class Power extends Parts {
     public String watts;
     public String modularStatus;
 
-    public Power(String name, String cost, Image image, String series, String form, String efficiency,
+    public Power(String name, String cost, String image, String series, String form, String efficiency,
                  String watts, String modularStatus) {
         super(name, cost, image);
         this.series =series;

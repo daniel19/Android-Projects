@@ -1,15 +1,24 @@
 package com.dbi.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +26,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.*;
 
@@ -205,5 +216,73 @@ public class SubList extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public class PartsArrayAdapter extends ArrayAdapter<Parts>{
+        class PartsHolder{
+            ImageView partImageView;
+            TextView partNameView;
+            TextView partCostView;
+            String url;
+            Bitmap map;
+        }
+        public PartsArrayAdapter(Context context, int resource, List<Parts> objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            PartsHolder holder = new PartsHolder();
+            if(convertView == null){
+                //inflate custom xml
+                LayoutInflater inflater = (LayoutInflater) this.getContext()
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.custom_listview,parent,false);
+                holder.partCostView = (TextView) convertView.findViewById(R.id.partCost);
+                holder.partNameView = (TextView) convertView.findViewById(R.id.partName);
+                holder.partImageView = (ImageView) convertView.findViewById(R.id.partsImg);
+                convertView.setTag(holder);
+            }else{
+                holder = (PartsHolder) convertView.getTag();
+            }
+            Parts part = getItem(position);
+            holder.partCostView.setText(part.name);
+            holder.partNameView.setText(part.cost);
+            holder.url = part.imageURL;
+            new DownloadAsyncTask().execute(holder);
+            //holder.partImageView.setImageResource(part.image);
+            return convertView;
+        }
+
+        class DownloadAsyncTask extends AsyncTask<PartsHolder, Void, PartsHolder>{
+            @Override
+            protected PartsHolder doInBackground(PartsHolder... params) {
+                PartsHolder parts = params[0];
+                Bitmap bitmap = null;
+                try{
+                    URL imageURL = new URL(parts.url);
+                    bitmap = BitmapFactory.decodeStream(imageURL.openStream());
+                    parts.map = bitmap;
+                }catch (IOException ex){
+                    Log.d("PICKER", ex.getMessage());
+                }
+                return parts;
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(PartsHolder holder) {
+                if(holder.map == null){
+                    holder.partImageView.setImageResource(R.drawable.iron);
+                }else{
+                    holder.partImageView.setImageBitmap(holder.map);
+                }
+            }
+        }
     }
 }
