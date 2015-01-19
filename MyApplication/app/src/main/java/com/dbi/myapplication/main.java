@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 import CloudRequest.PickerRequest;
-import Model.*;
+
 
 /**
  * main class will be the front page controller.
@@ -36,7 +36,7 @@ public class main extends ActionBarActivity {
     private ListView listView = null;
     private boolean filePresent = false;
     private ArrayList<String> keyList;
-    private JSONObject jsonResponse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,22 +78,22 @@ public class main extends ActionBarActivity {
             //Create PickerRequest object
             PickerRequest pickerRequest = new PickerRequest(this);
             //pickerRequest.execute(PickerRequest.MAIN_URL + PickerRequest.GET_URL + "?key=" +PickerRequest.API_KEY);
-            pickerRequest.execute("https://storage.googleapis.com/json_parts/list.json");
+            //pickerRequest.execute("https://storage.googleapis.com/json_parts/list.json");
+            pickerRequest.execute("https://storage.googleapis.com/json_parts/newList.json");
         }else if(!filePresent) {
             Toast.makeText(getApplicationContext(), "Not connected to a network.", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void setListView(JSONObject jsonResponse) {
-        this.jsonResponse = jsonResponse;
         try {
             if(jsonResponse != null) {
                 //A dictionary with a JSONArray array of arrays.
-               keyList = new ArrayList<String>();
-               Iterator<String> keys = jsonResponse.keys();
-               while(keys.hasNext()){
+                keyList = new ArrayList<String>();
+                Iterator<String> keys = jsonResponse.keys();
+                while(keys.hasNext()){
                     keyList.add(keys.next());
-               }
+                }
                 ArrayAdapter partsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, keyList);
                 listView.setAdapter(partsAdapter);
 
@@ -113,17 +113,10 @@ public class main extends ActionBarActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String item = keyList.get(position);
-            try {
-                JSONArray itemArray = (JSONArray)jsonResponse.get(item);
-                Intent subIntent = new Intent(main.this, SubList.class);
-                subIntent.putExtra("Name", item);
-                subIntent.putExtra("Object List", itemArray.toString());
-                main.this.startActivity(subIntent);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Intent subIntent = new Intent(main.this, SubList.class);
+            subIntent.putExtra("Name", item);
 
-
+            main.this.startActivity(subIntent);
         }
     }
 

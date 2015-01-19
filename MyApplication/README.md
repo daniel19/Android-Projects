@@ -11,4 +11,6 @@ incompatible parts in the build.
 STATUS
 -------------
     1) Find/Create reliable data set to use. 
-        - NOT FOUND
+        - FOUND
+    2) Create useful Interface/UI
+        - IN PROGRESS

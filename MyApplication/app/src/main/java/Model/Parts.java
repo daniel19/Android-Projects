@@ -13,7 +13,10 @@ public abstract class Parts implements Serializable{
     public Parts(String name, String cost, String imageURL){
         this.name = name;
         this.cost = cost;
-        this.imageURL = imageURL;
+        this.imageURL = "http://" + imageURL.substring(2);
+
+
+
     }
 
     public String toString(){

@@ -51,6 +51,7 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
         activity.setListView(jsonResponse);
         FileOutputStream out;
         try{
+            //Save downloaded file to directory
             out = activity.openFileOutput("list.json", Context.MODE_PRIVATE);
             byte[] bytes = result.getBytes();
             out.write(bytes, 0, bytes.length);
@@ -84,9 +85,7 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
             connection.setDoInput(true);
 
             connection.connect();
-            Log.d("PICKER", url);
-            Log.d("PICKER", "Response Code: " + connection.getResponseCode());
-            Log.d("PICKER", "Response Message: " + connection.getResponseMessage());
+
             inputStream = connection.getInputStream();
 
             jsonResponse = convertData(inputStream);
@@ -108,7 +107,5 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
         }
         return new JSONObject(builder.toString());
     }
-
-    public JSONObject getJsonResponse(){return jsonResponse;}
 
 }
