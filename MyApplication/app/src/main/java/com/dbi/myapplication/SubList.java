@@ -45,7 +45,6 @@ public class SubList extends ActionBarActivity {
         JSONArray response = loadJSONArray(intent.getStringExtra("Name"));
         ArrayList<Parts> list = grabItems(intent.getStringExtra("Name"), response);
         subListView = (ListView) findViewById(R.id.sublist);
-        //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         PartsArrayAdapter adapter = new PartsArrayAdapter(this,R.layout.custom_listview,list);
         subListView.setAdapter(adapter);
     }
@@ -61,12 +60,11 @@ public class SubList extends ActionBarActivity {
         } catch (IOException|JSONException e) {
             Log.e("PICKER", "No Array created: " + e.getMessage());
         }
-
         return array;
     }
 
     /**
-     *
+     * Pares the items to create and use the correct class for the selected part.
      * @param title
      * @param itemArray
      * @return ArrayList<Parts>
@@ -227,7 +225,9 @@ public class SubList extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Subclass of ArraryAdapter that displays the Part information.
+     */
     public class PartsArrayAdapter extends ArrayAdapter<Parts>{
         class PartsHolder{
             ImageView partImageView;
