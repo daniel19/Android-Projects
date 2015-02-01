@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+    <com.github.siyamed.shapeimageview.CircularImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:id="@+id/partsImg"
-        android:scaleType="centerCrop"
-        android:background="@color/material_blue_grey_800"/>
+        />
 
     <TextView
         android:id="@+id/partName"
@@ -19,7 +20,8 @@
         android:textStyle="bold"
 
         android:layout_alignTop="@+id/partsImg"
-        android:layout_toEndOf="@+id/partsImg" />
+        android:layout_toEndOf="@+id/partsImg"
+        android:textColor="#ffffffff" />
 
     <TextView
         android:id="@+id/partCost"
@@ -28,7 +30,8 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:layout_alignBottom="@+id/partsImg"
-        android:layout_toEndOf="@+id/partsImg" />
+        android:layout_toEndOf="@+id/partsImg"
+        android:textColor="#ffffffff" />
 
 
 

@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     //loads Google API Library GCS
     //compile 'com.google.apis:google-api-services-storage:v1-rev23-1.19.1'
+    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 }
