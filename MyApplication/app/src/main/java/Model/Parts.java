@@ -3,7 +3,7 @@ package Model;
 import java.io.Serializable;
 
 /**
- *Abstract class that will
+ *Abstract class that will be base of our model classes.
  */
 public abstract class Parts implements Serializable{
     public String name;
@@ -14,9 +14,6 @@ public abstract class Parts implements Serializable{
         this.name = name;
         this.cost = cost;
         this.imageURL = "http://" + imageURL.substring(2);
-
-
-
     }
 
     public String toString(){

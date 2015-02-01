@@ -8,8 +8,16 @@
         android:background="@color/material_blue_grey_800"
         android:id="@+id/detailImg"/>
     <TextView
+        android:id="@+id/detail_title"
         android:layout_width="match_parent"
         android:layout_height="20dp"
+        android:text="TITLE"
         android:layout_marginTop="80dp"/>
+    <TextView
+        android:id="@+id/detail_price"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="PRICE"
+        android:layout_marginTop="100dp"/>
 
 </RelativeLayout>
