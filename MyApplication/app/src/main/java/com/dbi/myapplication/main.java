@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,14 +37,14 @@ public class main extends ActionBarActivity {
     private ListView listView = null;
     private boolean filePresent = false;
     private ArrayList<String> keyList;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private CharSequence mTitle, mDrawerTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.partsList);
-        listView.setOnItemClickListener(new PartsListener());
-
+        setContentView(R.layout.meun_drawer);
 
         //Check to see if file is present
         try{
@@ -94,8 +95,40 @@ public class main extends ActionBarActivity {
                 while(keys.hasNext()){
                     keyList.add(keys.next());
                 }
+                /*listView = (ListView) findViewById(R.id.partsList);
+                listView.setOnItemClickListener(new PartsListener());
                 ArrayAdapter partsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, keyList);
-                listView.setAdapter(partsAdapter);
+                listView.setAdapter(partsAdapter);*/
+
+                drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+                mTitle = mDrawerTitle = getTitle();
+                listView = (ListView) findViewById(R.id.left_drawer);
+                listView.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, keyList));
+                listView.setOnItemClickListener(new PartsListener());
+
+                drawerToggle = new ActionBarDrawerToggle(
+                        this,                  /* host Activity */
+                        drawerLayout,         /* DrawerLayout object */
+                        (android.support.v7.widget.Toolbar)findViewById(R.id.my_awesome_toolbar),  /* nav drawer icon to replace 'Up' caret */
+                        R.string.drawer_open,  /* "open drawer" description */
+                        R.string.drawer_close  /* "close drawer" description */
+                ) {
+
+                    /** Called when a drawer has settled in a completely closed state. */
+                    public void onDrawerClosed(View view) {
+                        super.onDrawerClosed(view);
+                        //getActionBar().setTitle(mTitle);
+                    }
+
+                    /** Called when a drawer has settled in a completely open state. */
+                    public void onDrawerOpened(View drawerView) {
+                        super.onDrawerOpened(drawerView);
+                        //getActionBar().setTitle(mDrawerTitle);
+                    }
+                };
+
+                // Set the drawer toggle as the DrawerListener
+                drawerLayout.setDrawerListener(drawerToggle);
 
             }else{
                 Toast.makeText(getApplicationContext(), "No Data was returned.", Toast.LENGTH_SHORT).show();
@@ -103,6 +136,7 @@ public class main extends ActionBarActivity {
 
         }catch(Exception ex){
             Toast.makeText(getApplicationContext(), "A parsing error occurred.", Toast.LENGTH_LONG).show();
+            Log.e("PICKER",ex.getMessage());
         }
     }
 
@@ -115,8 +149,9 @@ public class main extends ActionBarActivity {
             String item = keyList.get(position);
             Intent subIntent = new Intent(main.this, SubList.class);
             subIntent.putExtra("Name", item);
-
+            drawerLayout.closeDrawer(listView);
             main.this.startActivity(subIntent);
+
         }
     }
 
