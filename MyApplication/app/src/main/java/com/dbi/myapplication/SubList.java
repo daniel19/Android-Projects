@@ -2,13 +2,11 @@ package com.dbi.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,16 +24,22 @@ import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.*;
+import Model.CPU;
+import Model.Case;
+import Model.Memory;
+import Model.MotherBoard;
+import Model.Parts;
+import Model.Power;
+import Model.Storage;
+import Model.VideoCard;
 
 
 public class SubList extends ActionBarActivity {
-    ListView subListView;
+    private ListView subListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

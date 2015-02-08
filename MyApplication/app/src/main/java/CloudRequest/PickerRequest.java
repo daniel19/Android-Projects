@@ -1,10 +1,11 @@
 package CloudRequest;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.dbi.myapplication.main;
+import com.dbi.myapplication.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,9 +29,9 @@ public class PickerRequest extends AsyncTask<String, Void, String> {
     public static final String GET_URL = "";
 
     public JSONObject jsonResponse;
-    public final main activity;
+    public final MainActivity activity;
     private ProgressDialog progressDialog;
-    public PickerRequest(main activity){
+    public PickerRequest(MainActivity activity){
         jsonResponse = null;
         this.activity = activity;
         progressDialog = new ProgressDialog(activity);

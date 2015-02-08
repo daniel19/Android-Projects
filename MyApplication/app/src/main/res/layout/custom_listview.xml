@@ -6,8 +6,8 @@
     android:background="?attr/colorPrimary">
 
     <com.github.siyamed.shapeimageview.CircularImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_margin="10dp"
         android:id="@+id/partsImg"
         />
